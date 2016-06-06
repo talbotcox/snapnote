@@ -19,7 +19,7 @@ var s3Client = s3.createClient({
 });
 
 var vision = watson.alchemy_vision({
-  "api_key": "e91e7fdba2b5297e81bb0924a169d5dd5b54c931",
+  api_key: local.vision_key
 });
 
 /** Middleware **/
