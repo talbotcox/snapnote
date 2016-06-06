@@ -1,0 +1,90 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	display: flex;
+	min-height: 100vh;
+	min-width: 100vw;
+	flex-flow: column;
+}
+
+ui-view {
+	flex: 1;
+	display: flex;
+	flex-flow: column;
+}
+
+.navbar {
+	flex: 0 0 4rem;
+	background: #222;
+	display: flex;
+	padding: 0 1rem;
+}
+
+.navbar .logo {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	max-height: 4rem;
+}
+
+.navbar .logo img {
+	max-height: 3rem;
+}
+
+.notes {
+	display: flex;
+	flex-flow: row wrap;
+	padding: 0.5rem;
+}
+
+.note {
+	display: flex;
+	flex-flow: column;
+	min-height: 10rem;
+	align-items: center;
+	text-decoration: none;
+	max-height: 10rem;
+	margin: 0.5rem;
+	box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+.note img {
+	max-height: 8rem;
+}
+
+.note span {
+	padding: 0.3rem;
+	color: #333;
+	font-weight: 100;
+	font-size: 1.2rem;
+}
+
+.f1 {
+	flex: 1;
+}
+
+.link {
+	text-transform: uppercase;
+	font-weight: 100;
+	font-size: 0.8rem;
+	color: #aaa;
+	cursor: pointer;
+	text-decoration: none;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	flex-flow: column;
+	transition: color 100ms ease;
+	padding: 1rem;
+}
+
+.link:hover, .link.active {
+	color: #FFF;
+}
+
+.fixvid{
+    position:fixed;
+    bottom:0px;
+    left:50%;
+    }

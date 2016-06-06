@@ -1,0 +1,15 @@
+<div class="navbar">
+	<div class="logo"><img src="http://i233.photobucket.com/albums/ee158/TriBoy44/SnapNote_Logo.png~original"></div>
+	<div class="f1"></div>
+	<a class="link" href="#/profile"><span>Profile</span></a>
+	<a class="link active" href="#/createnote"><span>Create Note</span></a>
+	<a class="link" ng-click="createnoteC.logout()"><span>Logout</span></a>
+</div>
+<h1>Create a new note</h1>
+<form ng-submit="createnoteC.create()">
+	<input type="text" placeholder="Name" ng-model="createnoteC.createForm.name">
+	<input type="text" placeholder="Description" ng-model="createnoteC.createForm.description">
+	<input type="text" placeholder="Keywords" ng-model="createnoteC.createForm.keywords">
+	<div class="button" ngf-select ng-model="createnoteC.createForm.img" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">Select</div>
+	<input type="submit" value="Create">
+</form>
