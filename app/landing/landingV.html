@@ -1,22 +1,38 @@
-<div class="navbar">
-	<div class="logo">
-		<img src="http://i233.photobucket.com/albums/ee158/TriBoy44/SnapNote_Logo.png~original">
-	</div>
-</div>
-<form ng-submit="landingC.signin()">
-	<h1>Sign In</h1>
-	<input type="text" placeholder="Username" ng-model="landingC.signinForm.username">
-	<input type="password" placeholder="Password" ng-model="landingC.signinForm.password">
-	<input type="submit" value="Sign In">
-</form>
-<form ng-submit="landingC.signup()">
-	<h1>Sign Up</h1>
-	<input type="text" placeholder="Name" ng-model="landingC.signupForm.name">
-	<input type="text" placeholder="Username" ng-model="landingC.signupForm.username">
-	<input type="password" placeholder="Password" ng-model="landingC.signupForm.password">
-	<input type="submit" value="Sign Up">
-</form>
 
-<!-- <video class="fixvid" autoplay poster="http://i233.photobucket.com/albums/ee158/TriBoy44/f576b83f-f0c0-4d62-8aa5-007b70329ce7.png~original">
-            <source src="Stock.mp4" type="video/mp4">
-        </video> -->
+<div style="display:none">
+	<form ng-submit="landingC.signup()" id="landingForm">
+		<h1>Sign Up</h1>
+		<input type="text" placeholder="Name" ng-model="landingC.signupForm.name">
+		<input type="text" placeholder="Username" ng-model="landingC.signupForm.username">
+		<input type="password" placeholder="Password" ng-model="landingC.signupForm.password">
+		<button type-="submit">Submit</button>
+	</form>
+</div>
+
+<dialog>
+	<div class="creatapptext">
+	  <h1>Create an accont now</h1>
+	  <h3>TO GET STARTED TODAY</h3>
+	</div>
+	<dialog-container>
+		<button ng-click="landingC.onShowForm()" id="landingButton">Enter your name</button>
+	</dialog-container>
+	<div class='appinfo'>
+		<app-info>
+				<h1>Snap Note</h1>
+				<p>SnapNote is a handy application with a convenient digitizer that allows you to upload a photo of your notes
+			 and it will convert them to text. Never lose your notes you can search them by date, title, or keywords. You can also
+			create your own text notes. We are here to make your notes more orginized and make it easy 
+			to create notes. You do the jotting we will do orginizing.</p>
+	   </app-info>
+	</div>	
+</dialog>
+
+
+<artcile style="position:relative; top:0; max-width: 100%; width: 100%; background: white;">
+	<video class="fixvid" style="width: 100%" autoplay poster="Background.png">
+	    <source src="Stock.mp4" type="video/mp4">
+	</video>	
+
+		
+</artcile> 

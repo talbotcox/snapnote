@@ -1,0 +1,10 @@
+<div class="head col aic">
+	<div class="title">Search</div>
+	<div class="subtitle">Find a friend</div>
+	<input class="search" placeholder="Search" ng-model="usersC.searchText">
+</div>
+<div class="cards row wrap jcc">
+	<a href="#/users/{{user.username}}" class="user card" ng-repeat="user in usersC.users | filter:usersC.searchText">
+		<span>{{user.name}}</span>
+	</a>
+</div>

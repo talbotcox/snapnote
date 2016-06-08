@@ -1,7 +1,7 @@
 angular.module('snapnote')
 	.factory('API', API);
 
-function API($http) {
+function API($http, $window) {
 	var self = this;
 
 	self.get = function(url, options) {
@@ -11,27 +11,35 @@ function API($http) {
 	self.post = function(url, options) {
 		return $http.post(url, options);
 	}
+	
+	self.ls = {
+		get(key) {
+			return $window.localStorage.getItem(key);
+		},
+		set(key, value) {
+			return $window.localStorage.setItem(key, value);
+		},
+		clear() {
+			return $window.localStorage.clear();
+		}
+	}
 
-	self.signin = function(options) {
-		return self.post('/login', options)
+	self.getUsers = function() {
+		return self.get('/users')
 			.then(response => response.data);
 	}
-
-	self.signup = function(options) {
-		return self.post('/signup', options)
+	
+	self.getNotes = function(username) {
+		return self.get('/notes/' + username)
 			.then(response => response.data);
 	}
-
-	self.createnote = function(options) {
-		return self.post('/note', options);
-	}
-
-	self.getnotes = function() {
-		return self.get('/notes')
+	
+	self.createNote = function(form) {
+		return self.post('/note', form)
 			.then(response => response.data);
 	}
-
-	self.getnote = function(id) {
+	
+	self.getNote = function(id) {
 		return self.get('/note/' + id)
 			.then(response => response.data);
 	}

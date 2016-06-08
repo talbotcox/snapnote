@@ -1,0 +1,11 @@
+<div class="notediv">
+	<h1>Create a new note</h1>
+		<form ng-submit="createnoteC.create()">
+				<input placeholder="Note Name" ng-model="createnoteC.createForm.name">
+				<input placeholder="Description" ng-model="createnoteC.createForm.description">
+				<input placeholder="Keywords" ng-model="createnoteC.createForm.keywords">
+				<div class="button" ngf-select ng-model="createnoteC.createForm.img" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">Select</div>
+				<button class="button" type="submit" value="Create" style="vertical-align:middle"><span>Create </span></button>
+		</form>
+</div>
+

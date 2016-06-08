@@ -1,32 +1,34 @@
+/*global DialogElement*/
+
 angular.module('snapnote')
 	.controller('landingC', landingC);
 
-function landingC(API, $window, $state) {
+function landingC(Auth, $state) {
 	var self = this;
-	self.signinForm = {};
 	self.signupForm = {};
-
-	self.signin = function() {
-		API.signin(self.signinForm)
-			.then(response => {
-				if (response.token) {
-					$window.localStorage.setItem('token', response.token);
-					$state.go('profile');
-				} else {
-					console.log(response);
-				}
-			});
+	self.landingDialog = new DialogElement({events:true});
+	
+	
+	self.documentHandler = function() {
+		if (!self.landingDialog.container.contains(event.target)) {
+			self.landingDialog.close();		
+			self.landingDialog.element.removeEventListener('click', self.documentHandler, true);
+		}
+		
+	}
+	
+	self.onShowForm = function() {
+		self.landingDialog.configure({element:  document.querySelector('#landingForm')})
+		self.landingDialog.open();
+		
+		self.landingDialog.element.addEventListener('click', self.documentHandler, true);
 	}
 
 	self.signup = function() {
-		API.signup(self.signupForm)
-			.then(response => {
-				if (response.id) {
-					self.signinForm = self.signupForm;
-					self.signin();
-				} else {
-					console.log(response);
-				}
-			});
+		self.landingDialog.close();
+		self.landingDialog.element.removeEventListener('click', self.documentHandler, true);
+		
+		return Auth.signup(self.signupForm)
+			.then(response => $state.go('user', { username: response.username }));
 	}
 }

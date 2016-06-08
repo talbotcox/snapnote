@@ -1,0 +1,12 @@
+<div class="head col aic">
+	<div class="title">Search</div>
+	<div class="subtitle">Search notes by keywords</div>
+	<input class="search" placeholder="Search" ng-model="userC.searchText">
+</div>
+<div ng-if="userC.notes.length" class="cards2 row wrap jcc">
+	<a href="#/notes/{{note.id}}" class="note card2 col aic" ng-repeat="note in userC.notes | filter:userC.searchText">
+		<img ng-src="{{note.img}}">
+		<span>{{note.name}}</span>
+	</a>
+</div>
+

@@ -81,7 +81,8 @@ app.post('/login', (req, res) => {
           });
           res.json({
             success: true,
-            message: 'YOU get a token! YOU get a token! YOU get a token!',
+            username: req.body.username,
+            name: foundUser.get('name'),
             token: token
           });
         } else {
@@ -118,16 +119,23 @@ app.post('/note', auth, (req, res) => {
     var url = s3.getPublicUrlHttp('snapnoteapp', unique);
 
     // vision.getImageKeywords({image: url}, (err, keywords) => {
-    //   Note.create({
-    //     userId: req.user.id,
-    //     name: body.name,
-    //     img: url,
-    //     description: body.description,
-    //     keywords: keywords
-    //   }).then(createdNote => {
-    //     res.send(createdNote);
-    //   })
+      
+    //   if (err) {
+    //     console.log(err);
+    //     res.status(500).send(err);
+    //   } else {
+    //     Note.create({
+    //       userId: req.user.id,
+    //       name: body.name,
+    //       img: url,
+    //       description: body.description,
+    //       keywords: keywords
+    //     }).then(createdNote => {
+    //       res.send(createdNote);
+    //     }); 
+    //   }
     // });
+    
 
     Note.create({
       userId: req.user.id,
@@ -142,16 +150,26 @@ app.post('/note', auth, (req, res) => {
   });
 });
 
-app.get('/notes', auth, (req, res) => {
-  Note.findAll({where: {
-    userId: req.user.id
-  }})
+app.get('/users', auth, (req, res) => {
+  User.findAll()
+    .then(users => {
+      res.send(users);
+    });
+});
+
+app.get('/notes/:username', auth, (req, res) => {
+  User.findOne({where: {username: req.params.username}})
+    .then(foundUser => {
+      return Note.findAll({where: {
+        userId: foundUser.id
+      }});
+    })
     .then(foundNotes => {
       res.send(foundNotes);
     });
 });
 
-app.listen(9000);
+app.listen(process.env.PORT || 9000);
 
 /** Helpers **/
 

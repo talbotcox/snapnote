@@ -1,7 +1,7 @@
 angular.module('snapnote')
 	.controller('createnoteC', createnoteC);
 
-function createnoteC(Upload, API, $state, $window) {
+function createnoteC(Upload, API, $state) {
 	var self = this;
 	self.createForm = {};
 
@@ -14,13 +14,10 @@ function createnoteC(Upload, API, $state, $window) {
 			data: self.createForm
 		})
 		.then(response => {
-			$state.go('profile');
+			$state.go('user', {
+				username: API.ls.get('username')
+			});
 		})
 		.catch(e => console.log(e));
-	}
-
-	self.logout = function() {
-		$window.localStorage.removeItem('token');
-		$state.go('landing');
 	}
 }

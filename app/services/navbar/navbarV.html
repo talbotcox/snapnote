@@ -1,0 +1,41 @@
+<div class="f1 row navbar" ng-controller="navbarC as navbarC">
+	
+	
+<div style="display:none">
+	<form ng-submit="navbarC.create()" id="landingForm">
+		<h1>Create Note</h1>
+		<input placeholder="Note Name" ng-model="navbarC.createForm.name">
+		<input placeholder="Description" ng-model="navbarC.createForm.description">
+		<input placeholder="Keywords" ng-model="navbarC.createForm.keywords">
+		<div class="button" ngf-select ng-model="navbarC.createForm.img" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">Select</div>
+		<button type-="submit">Submit</button>
+	</form>
+</div>
+	
+	<div class="logo col">
+		<img src="SnapNote_Logo.png">
+	</div>
+	<div class="f1"></div>
+	<div ng-if="!navbarC.Auth.isAuth()" class="link col jcc aic"><span>Login</span>
+		<div class="dropdown col">
+			<input type="text" placeholder="Username" ng-model="navbarC.loginForm.username">
+			<input type="password" placeholder="Password" ng-model="navbarC.loginForm.password">
+			<input type="submit" value="Login" ng-click="navbarC.login()">
+		</div>
+	</div>
+	<a class="link col jcc aic" ng-if="navbarC.Auth.isAuth()" href="#/users"><span>Users</span></a>
+	<div class="navbartop">
+		<dialog-container>
+			<a class="link col jcc aic" ng-if="navbarC.Auth.isAuth()" ng-click="navbarC.onShowForm()"><span>Create Note</span></a>
+		</dialog-container>	
+	</div>
+	
+	<div ng-if="navbarC.Auth.isAuth()" class="link col jcc aic"><span>{{navbarC.API.ls.get('name')}}</span>
+		<div class="dropdown col">
+		    <a class="link col jcc aic" href="#/users/{{navbarC.API.ls.get('username')}}">Profile</a>
+		    <a class="link col jcc aic" ng-click="navbarC.logout()">Logout</a>
+		</div>
+	</div>
+</div>
+
+
