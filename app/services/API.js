@@ -43,6 +43,23 @@ function API($http, $window) {
 		return self.get('/note/' + id)
 			.then(response => response.data);
 	}
+	
+	self.getCommentsByNoteId = function(id){
+		return $http.get(`/comment/${id}`)
+			.then(response => response.data);
+	}
+	
+	self.addComment = function(comment) {
+		return $http.post('/comment', comment)
+			.then(res => res.data)
+			.catch(err => console.error(err))
+	}
+	
+	self.deleteComment = function(id) {
+		return $http.delete(`/comment/${id}`)
+			.then(res => res.data)
+			.catch(err => console.error(err))
+	}
 
 	return self;
 }

@@ -1,9 +1,24 @@
-<div class="whitebox">
-
-<h1 class='notename'>{{noteC.note.name}}</h1>
-<p class='des'>{{noteC.note.description}}</p>
-<img class='notesimg' src="{{noteC.note.img}}">
-<br>
-<code class='des'>{{noteC.note.keywords}}</code>
-
+<div class="flex-container note-view">
+    <div class="whitebox">
+        <h1 class='notename'>{{noteC.note.name}}</h1>
+        <p class='des'>{{noteC.note.description}}</p>
+        <img class='notesimg' src="{{noteC.note.img}}">
+        <br>
+        <code class='des'>{{noteC.note.keywords}}</code>
+    </div>
+    
+    <div class="commentbox">
+        <h1 class='notename'>Comments</h1>
+        <div class="comment-container" id="commentContainer">
+            <div ng-repeat="comm in noteC.comments">
+                <p class='des'><strong>{{comm.name}}</strong></p>
+                <p class='des' > {{comm.text}} </p>
+            </div>
+        </div>
+        <form ng-submit="noteC.addComment()" class="note-comment-form">
+            <input type="text" name="Comment" id="commentInput"/>
+            <button type="submit">Add Comment</button>
+        </form>
+        
+    </div>
 </div>

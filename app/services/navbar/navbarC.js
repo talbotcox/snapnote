@@ -39,7 +39,7 @@ function navbarC($state, Auth, API, Upload) {
 	}
 	
 	self.onShowForm = function() {
-		self.landingDialog.configure({element:  document.querySelector('#landingForm')})
+		self.landingDialog.configure({element:  document.querySelector('#submitform')})
 		self.landingDialog.open();
 		
 		self.landingDialog.element.addEventListener('click', self.documentHandler, true);
@@ -56,14 +56,26 @@ function navbarC($state, Auth, API, Upload) {
 	self.createForm = {};
 	
 	self.create = function() {
-
-		self.createForm.keywords = JSON.stringify(self.createForm.keywords.split(' '));
+		
+		var data = {
+			name: self.createForm.name,
+			img: self.createForm.img,
+			description: self.createForm.description,
+			keywords: JSON.stringify(self.createForm.keywords.split(' ')),
+		}
+		
+		if (self.landingDialog) {
+			self.landingDialog.close();
+		}
 
 		Upload.upload({
 			url: '/note',
-			data: self.createForm
+			data: data
 		})
 		.then(response => {
+			
+			document.dispatchEvent(new CustomEvent('notes-changed', {cancelable: true, bubbles:true}));
+			
 			$state.go('user', {
 				username: API.ls.get('username')
 			});

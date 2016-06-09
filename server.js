@@ -53,6 +53,17 @@ var Note = db.define('note', {
   description: Sequelize.TEXT
 });
 
+
+var Comment = db.define('comment', {
+  name: Sequelize.STRING,
+  text: Sequelize.TEXT,
+  noteId: Sequelize.INTEGER
+});
+
+
+
+// comments: Sequelize.Array(Sequelize.JSON)
+
 User.hasMany(Note);
 
 db.sync();
@@ -100,6 +111,21 @@ app.get('/note/:id', auth, (req, res) => {
       res.send(note.get());
     });
 });
+
+
+// app.put('/note/:id', auth, (req, res) => {
+  
+//   return res.json(req.body);
+//   Note.findOne({where: {id: req.params.id}})
+//     .then(note => {
+      
+//       note.comments = req.body.comments;
+//       note.save().then(()=> {
+//         res.send(note.get());
+//       })
+//     });
+// });
+
 
 app.post('/note', auth, (req, res) => {
   var body = req.body;
@@ -168,6 +194,40 @@ app.get('/notes/:username', auth, (req, res) => {
       res.send(foundNotes);
     });
 });
+
+
+
+app.post('/comment', function(req, res) {
+  
+  Comment.create(req.body)
+    .then(comment => {
+      res.josn(comment);
+    })
+    .catch(err => {
+      res.json(err);
+    })
+});
+
+app.get('/comment', function(req, res) {
+  Comment.findAll()
+    .then(comments => {
+      res.json(comments);
+    })
+})
+
+app.get('/comment/:noteId', function(req, res) {
+  Comment.findAll({where: {noteId: req.params.noteId}})
+    .then(comments => {
+      res.json(comments);
+    })
+})
+
+app.delete('/comment/:commentId', function(req, res) {
+  Comment.findAll({where: {noteId: req.params.noteId}})
+    .then(comments => {
+      res.json(comments);
+    })
+})
 
 app.listen(process.env.PORT || 9000);
 

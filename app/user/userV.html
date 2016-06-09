@@ -1,12 +1,30 @@
-<div class="head col aic">
+<div class="head col aic user-head">
 	<div class="title">Search</div>
 	<div class="subtitle">Search notes by keywords</div>
 	<input class="search" placeholder="Search" ng-model="userC.searchText">
 </div>
-<div ng-if="userC.notes.length" class="cards2 row wrap jcc">
-	<a href="#/notes/{{note.id}}" class="note card2 col aic" ng-repeat="note in userC.notes | filter:userC.searchText">
-		<img ng-src="{{note.img}}">
-		<span>{{note.name}}</span>
-	</a>
+
+
+<div class="flex-container flex-row">
+	<card ng-if="userC.notes.length" ng-repeat="note in userC.notes | filter:userC.searchText">
+		<header>
+			<a href="#/notes/{{note.id}}">
+				<h3>{{note.name}}</h3>
+				<p>
+					{{note.description}}
+				</p>
+				
+			</a>
+		</header>
+		
+		<card-media ng-click="userC.navigate($event)" href="#/notes/{{note.id}}" style="background-image: url('{{note.img}}')"></card-media>
+	</card>	
 </div>
+
+<!--<div ng-if="userC.notes.length" class="cards2 row wrap jcc">-->
+<!--	<a href="#/notes/{{note.id}}" class="note card2 col aic" ng-repeat="note in userC.notes | filter:userC.searchText">-->
+<!--		<img ng-src="{{note.img}}">-->
+<!--		<span>{{note.name}}</span>-->
+<!--	</a>-->
+<!--</div>-->
 
